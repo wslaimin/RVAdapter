@@ -19,13 +19,13 @@ android {
 
 
 
-## dependency
+## Dependency
 
 ```
 implementation 'io.github.wslaimin:RVAdapter:1.0.0'
 ```
 
-## usage
+## Usage
 
 Classes extend RVAdapter.
 
