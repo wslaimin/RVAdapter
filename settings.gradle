@@ -1,0 +1,3 @@
+include ':rvadapter'
+include ':app'
+rootProject.name = "RVAdapter"
