@@ -1,8 +1,14 @@
 project.plugins.apply('maven-publish')
 project.plugins.apply('signing')
 
-def localProperties=new Properties()
-localProperties.load(project.file('local.properties').newDataInputStream())
+def localProps=new Properties()
+localProps.load(project.file('local.properties').newDataInputStream())
+Enumeration enumeration = localProps.keys();
+while (enumeration.hasMoreElements()) {
+    def key = enumeration.nextElement();
+    def value = localProps.get(key);
+    project.properties[key]=value
+}
 
 afterEvaluate {
     publishing {
@@ -47,8 +53,8 @@ afterEvaluate {
 
                 url = publishing.publications.release.version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
                 credentials {
-                    username = localProperties['credencial.username']
-                    password = localProperties['credencial.password']
+                    username = project.properties['credencial.username']
+                    password = project.properties['credencial.password']
                 }
             }
             maven {
@@ -58,7 +64,7 @@ afterEvaluate {
         }
     }
 
-    if(localProperties['signing.keyId']&&localProperties['signing.password']&&localProperties['signing.secretKeyRingFile']){
+    if(project.properties['signing.keyId']&&project.properties['signing.password']&&project.properties['signing.secretKeyRingFile']){
         signing {
             sign publishing.publications.release
         }
