@@ -42,3 +42,20 @@ class ImageAdapter extends RVAdapter<Integer, ItemImageBinding> {
     }
 }
 ```
+
+Set item click listener.
+
+```
+textAdapter.setItemClickListener((view, position, viewType) -> {
+		Toast.makeText(this, textAdapter.getData().get(position), Toast.LENGTH_LONG).show();
+});
+```
+
+Add click listener to children of item view.
+
+```
+imageAdapter.addViewClickListener((view, position, viewType) -> {
+		Toast.makeText(this, "click image", Toast.LENGTH_LONG).show();
+}, R.id.image);
+```
+
